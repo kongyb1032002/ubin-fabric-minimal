@@ -72,6 +72,17 @@ Install() {
     CHAINCODE=$1
 
     echo "POST install chaincode ${CHAINCODE} version ${VERSION} on ${ORG_NAME}/${ORG_USER} with ${ORG_PEER}"
+    echo curl -s -X POST \
+        http://localhost:8080/api/chaincodes \
+        -H "content-type: application/json" \
+        -d "{
+        \"username\" : \"${ORG_USER}\",
+        \"orgname\" : \"${ORG_NAME}\",
+        \"peers\" : [\"${ORG_PEER}\"],
+        \"chaincodeName\":\"${CHAINCODE}_cc\",
+        \"chaincodePath\":\"ubin-fabric/chaincode/${CHAINCODE}\",
+        \"chaincodeVersion\":\"${VERSION}\"
+    }"
     RESP=$(curl -s -X POST \
         http://localhost:8080/api/chaincodes \
         -H "content-type: application/json" \
@@ -97,6 +108,19 @@ InstantiateBilateral() {
     echo "PEER: $ORG_PEER"
 
     echo "POST instantiate chaincode on ${CHANNEL} using ${ORG_NAME}/${ORG_USER}"
+    echo curl -s -X POST \
+        http://localhost:8080/api/channels/${CHANNEL}/chaincodes \
+        -H "content-type: application/json" \
+        -d "{
+        \"username\" : \"${ORG_USER}\",
+        \"orgname\" : \"${ORG_NAME}\",
+        \"peers\" : [\"${ORG_PEER}\"],
+        \"functionName\" : \"init\",
+        \"args\" : [],
+        \"chaincodeName\":\"bilateralchannel_cc\",
+        \"chaincodePath\":\"ubin-fabric/chaincode/bilateralchannel\",
+        \"chaincodeVersion\":\"${VERSION}\"
+    }"
     RESP=$(curl -s -X POST \
         http://localhost:8080/api/channels/${CHANNEL}/chaincodes \
         -H "content-type: application/json" \
@@ -120,6 +144,19 @@ InstantiateMultilateral() {
     CHANNEL=$1
 
     echo "POST instantiate chaincode on ${CHANNEL} using ${ORG_NAME}/${ORG_USER} with ${ORG_PEER}"
+    echo curl -s -X POST \
+        http://localhost:8080/api/channels/${CHANNEL}/chaincodes \
+        -H "content-type: application/json" \
+        -d "{
+        \"username\" : \"${ORG_USER}\",
+        \"orgname\" : \"${ORG_NAME}\",
+        \"peers\" : [\"${ORG_PEER}\"],
+        \"functionName\" : \"init\",
+        \"args\" : [],
+        \"chaincodeName\":\"${CHANNEL}_cc\",
+        \"chaincodePath\":\"ubin-fabric/chaincode/${CHANNEL}\",
+        \"chaincodeVersion\":\"${VERSION}\"
+    }"
     RESP=$(curl -s -X POST \
         http://localhost:8080/api/channels/${CHANNEL}/chaincodes \
         -H "content-type: application/json" \
@@ -148,6 +185,19 @@ Upgrade() {
     fi
 
     echo "POST upgrade chaincode on ${CHANNEL} using ${ORG_NAME}/${ORG_USER} with ${ORG_PEER}"
+    echo curl -s -X POST \
+        http://localhost:8080/api/channels/${CHANNEL}/chaincodes/upgrade \
+        -H "content-type: application/json" \
+        -d "{
+        \"username\" : \"${ORG_USER}\",
+        \"orgname\" : \"${ORG_NAME}\",
+        \"peers\" : [\"${ORG_PEER}\"],
+        \"functionName\" : \"init\",
+        \"args\" : [],
+        \"chaincodeName\":\"${CHAINCODE}_cc\",
+        \"chaincodePath\":\"ubin-fabric/chaincode/${CHAINCODE}\",
+        \"chaincodeVersion\":\"${VERSION}\"
+    }"
     RESP=$(curl -s -X POST \
         http://localhost:8080/api/channels/${CHANNEL}/chaincodes/upgrade \
         -H "content-type: application/json" \
@@ -186,6 +236,16 @@ InitAccount() {
     SetPeers ${CHANNEL}
 
     echo "POST - initAccount ${ACCOUNT} with ${AMOUNT} ${CURRENCY} in ${CHANNEL}"
+    echo curl -s -X POST \
+        http://localhost:8080/api/channels/${CHANNEL}/chaincodes/bilateralchannel_cc \
+        -H "content-type: application/json" \
+        -d "{
+        \"username\" : \"${ORG_USER}\",
+        \"orgname\" : \"${ORG_NAME}\",
+        \"peers\": [\"${CHANNEL_PEER0}\", \"${CHANNEL_PEER1}\"],
+        \"fcn\":\"initAccount\",
+        \"args\":[\"${ACCOUNT}\",\"${CURRENCY}\",\"${AMOUNT}\",\"NORMAL\"] 
+    }"
     RESP=$(curl -s -X POST \
         http://localhost:8080/api/channels/${CHANNEL}/chaincodes/bilateralchannel_cc \
         -H "content-type: application/json" \

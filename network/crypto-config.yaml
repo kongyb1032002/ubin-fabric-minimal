@@ -14,7 +14,7 @@ PeerOrgs:
     Users:
       Count: 0
     SANS:
-      - "ntkong"
+      - "ntkong-vnpay"
 
   - Name: bofasg2x
     Domain: bofasg2x.example.com

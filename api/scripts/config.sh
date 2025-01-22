@@ -5,7 +5,7 @@ NETWORK_REFERENCE_FILE=${NETWORK_CONFIG_PATH}/network-reference.json
 REGULATOR_ORG=org0
 
 ORG0_NAME=org0
-ORG0_HOST=ntkong
+ORG0_HOST=ntkong-vnpay
 ORG0_CONFIG=network-config_masgsgsg
 
 ORG1_NAME=org1
@@ -61,10 +61,10 @@ if [ $? -ne 0 ]; then
 fi
 
 case $(hostname) in
-    ${ORG0_HOST})
-        NETWORK_CONFIG=${ORG0_CONFIG}
-        ORG_NAME=${ORG0_NAME}
-        ;;
+    # ${ORG0_HOST})
+    #     NETWORK_CONFIG=${ORG0_CONFIG}
+    #     ORG_NAME=${ORG0_NAME}
+    #     ;;
     ${ORG1_HOST})
         NETWORK_CONFIG=${ORG1_CONFIG}
         ORG_NAME=${ORG1_NAME}
