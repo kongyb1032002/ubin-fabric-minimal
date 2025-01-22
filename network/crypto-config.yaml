@@ -14,7 +14,7 @@ PeerOrgs:
     Users:
       Count: 0
     SANS:
-      - "FabricNx02"
+      - "ntkong-vnpay"
 
   - Name: bofasg2x
     Domain: bofasg2x.example.com
@@ -25,7 +25,7 @@ PeerOrgs:
     Users:
       Count: 0
     SANS:
-      - "FabricNx03"
+      - "ntkong-vnpay"
   - Name: chassgsg
     Domain: chassgsg.example.com
     CA:
@@ -35,7 +35,7 @@ PeerOrgs:
     Users:
       Count: 0
     SANS:
-      - "FabricNx04"
+      - "ntkong-vnpay"
   - Name: citisgsg
     Domain: citisgsg.example.com
     CA:
@@ -45,7 +45,7 @@ PeerOrgs:
     Users:
       Count: 0
     SANS:
-      - "FabricNx05"
+      - "ntkong-vnpay"
   - Name: csfbsgsx
     Domain: csfbsgsx.example.com
     CA:
@@ -55,7 +55,7 @@ PeerOrgs:
     Users:
       Count: 0
     SANS:
-      - "FabricNx06"
+      - "ntkong-vnpay"
   - Name: dbsssgsg
     Domain: dbsssgsg.example.com
     CA:
@@ -65,7 +65,7 @@ PeerOrgs:
     Users:
       Count: 0
     SANS:
-      - "FabricNx07"
+      - "ntkong-vnpay"
   - Name: hsbcsgsg
     Domain: hsbcsgsg.example.com
     CA:
@@ -75,7 +75,7 @@ PeerOrgs:
     Users:
       Count: 0
     SANS:
-      - "FabricNx08"
+      - "ntkong-vnpay"
   - Name: mtbcsgsg
     Domain: mtbcsgsg.example.com
     CA:
@@ -85,7 +85,7 @@ PeerOrgs:
     Users:
       Count: 0
     SANS:
-      - "FabricNx09"
+      - "ntkong-vnpay"
   - Name: ocbcsgsg
     Domain: ocbcsgsg.example.com
     CA:
@@ -95,7 +95,7 @@ PeerOrgs:
     Users:
       Count: 0
     SANS:
-      - "FabricNx010"
+      - "ntkong-vnpay"
   - Name: scblsgsg
     Domain: scblsgsg.example.com
     CA:
@@ -105,7 +105,7 @@ PeerOrgs:
     Users:
       Count: 0
     SANS:
-      - "FabricNx011"
+      - "ntkong-vnpay"
   - Name: uobvsgsg
     Domain: uobvsgsg.example.com
     CA:
@@ -115,7 +115,7 @@ PeerOrgs:
     Users:
       Count: 0
     SANS:
-      - "FabricNx012"
+      - "ntkong-vnpay"
   - Name: xsimsgsg
     Domain: xsimsgsg.example.com
     CA:
@@ -125,4 +125,4 @@ PeerOrgs:
     Users:
       Count: 0
     SANS:
-      - "FabricNx013"
+      - "ntkong-vnpay"

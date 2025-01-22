@@ -9,7 +9,8 @@ ALL_CHANNEL_TXS=( $(ls -q channel-artifacts/*-channel.tx | xargs -n 1 basename) 
 # Determine identity of current VM
 container_id=""
 bank_name=""
-container=$(docker ps | grep "fabric-peer")
+# container=$(docker ps | grep "fabric-peer")
+container=$(docker ps | grep "_peer0-xsimsgsg")
 if [[ ${container} =~ ^([0-9a-f]+)\ .*peer0-([a-z,0-9]*)\. ]]; then
     container_id="${BASH_REMATCH[1]}"
     bank_name="${BASH_REMATCH[2]}"
