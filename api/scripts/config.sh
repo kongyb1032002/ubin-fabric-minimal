@@ -1,4 +1,4 @@
-z#!/bin/bash
+#!/bin/bash
 
 NETWORK_CONFIG_PATH=../config
 NETWORK_REFERENCE_FILE=${NETWORK_CONFIG_PATH}/network-reference.json
