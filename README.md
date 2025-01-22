@@ -143,7 +143,7 @@ cd $GOPATH/src/ubin-fabric/network
 
 2. Once all other nodes have joined the swarm, start the docker stack on the manager node
     ```
-    docker stack up ubin -c docker-compose.yaml
+    docker stack deploy -c docker-compose.yaml ubin
     ```
 
     Note: Once all the docker containers are created, it is recommended to wait for approximately 2 minutes before moving on to the next step
