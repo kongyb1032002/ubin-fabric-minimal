@@ -5,7 +5,7 @@ NETWORK_REFERENCE_FILE=${NETWORK_CONFIG_PATH}/network-reference.json
 REGULATOR_ORG=org0
 
 ORG0_NAME=org0
-ORG0_HOST=ntkong-vnpay
+ORG0_HOST=ntkong
 ORG0_CONFIG=network-config_masgsgsg
 
 ORG1_NAME=org1

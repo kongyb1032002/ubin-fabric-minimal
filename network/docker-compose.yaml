@@ -86,7 +86,7 @@ services:
             condition: on-failure
             max_attempts: 1
          placement:
-            constraints: [node.hostname == ntkong-vnpay]
+            constraints: [node.hostname == ntkong]
 
    peer0-masgsgsg:
       container_name: peer0.masgsgsg.example.com
@@ -133,7 +133,7 @@ services:
             condition: on-failure
             max_attempts: 1
          placement:
-            constraints: [node.hostname == ntkong-vnpay]
+            constraints: [node.hostname == ntkong]
 
    couchdb-masgsgsg:
       container_name: couchdb-masgsgsg
@@ -152,7 +152,7 @@ services:
             condition: on-failure
             max_attempts: 1
          placement:
-            constraints: [node.hostname == ntkong-vnpay]
+            constraints: [node.hostname == ntkong]
 
    ###############################################
    # BOFASG2X organization
