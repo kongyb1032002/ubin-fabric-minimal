@@ -1,0 +1,1 @@
+./init.sh > ../logs/init.log 2>&1    
