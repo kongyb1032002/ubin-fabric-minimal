@@ -61,10 +61,10 @@ if [ $? -ne 0 ]; then
 fi
 
 case $(hostname) in
-    # ${ORG0_HOST})
-    #     NETWORK_CONFIG=${ORG0_CONFIG}
-    #     ORG_NAME=${ORG0_NAME}
-    #     ;;
+    ${ORG0_HOST})
+        NETWORK_CONFIG=${ORG0_CONFIG}
+        ORG_NAME=${ORG0_NAME}
+        ;;
     ${ORG1_HOST})
         NETWORK_CONFIG=${ORG1_CONFIG}
         ORG_NAME=${ORG1_NAME}
