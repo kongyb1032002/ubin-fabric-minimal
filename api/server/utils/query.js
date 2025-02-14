@@ -8,7 +8,7 @@ var config = require('../config.json');
 var helper = require('./helper.js');
 var logger = helper.getLogger('Query');
 
-function queryChaincode(peer, channelName, chaincodeName, args, fcn, username, org, retryNos=1) {
+function queryChaincode(peer, channelName, chaincodeName, args, fcn, username, org, retryNos = 1) {
 	var channel = helper.getChannelForOrg(org + ':' + channelName);
 	var client = helper.getClientForOrg(org);
 	var target = buildTarget(peer, org);
@@ -22,12 +22,12 @@ function queryChaincode(peer, channelName, chaincodeName, args, fcn, username, o
 			fcn: fcn,
 			args: args
 		};
-		logger.info("query to %s request: %j" , channelName , request)
+		logger.info("query to %s request: %j", channelName, request)
 		return channel.queryByChaincode(request, target);
 	}, (err) => {
-		logger.info('Failed to get submitter \''+username+'\'');
+		logger.info('Failed to get submitter \'' + username + '\'');
 		errorFlag = true;
-		return 'Failed to get submitter \''+username+'\'. Error: ' + err.stack ? err.stack :
+		return 'Failed to get submitter \'' + username + '\'. Error: ' + err.stack ? err.stack :
 			err;
 	}).then((response_payloads) => {
 		if (response_payloads) {
@@ -40,9 +40,9 @@ function queryChaincode(peer, channelName, chaincodeName, args, fcn, username, o
 			errorFlag = true;
 			return 'response_payloads is null';
 		}
-		if(errorFlag && retryNos > 0 ){
-			logger.warn("----RETRYING --%s-- ----" , retryNos)
-			var returnMsg = queryChaincode(peer, channelName, chaincodeName, args, fcn, username, org, --retryNos )
+		if (errorFlag && retryNos > 0) {
+			logger.warn("----RETRYING --%s-- ----", retryNos)
+			var returnMsg = queryChaincode(peer, channelName, chaincodeName, args, fcn, username, org, --retryNos)
 			return returnMsg;
 		}
 	}, (err) => {
@@ -57,7 +57,7 @@ function queryChaincode(peer, channelName, chaincodeName, args, fcn, username, o
 	});
 };
 
-var getBlockByNumber = function(peer, blockNumber, username, org, channelName) {
+var getBlockByNumber = function (peer, blockNumber, username, org, channelName) {
 	var target = buildTarget(peer, org);
 	var channel = helper.getChannelForOrg(org + ':' + channelName);
 
@@ -85,7 +85,7 @@ var getBlockByNumber = function(peer, blockNumber, username, org, channelName) {
 		return 'Failed to query with error:' + err.stack ? err.stack : err;
 	});
 };
-var getTransactionByID = function(peer, trxnID, username, org, channelName) {
+var getTransactionByID = function (peer, trxnID, username, org, channelName) {
 	var target = buildTarget(peer, org);
 	var channel = helper.getChannelForOrg(org + ':' + channelName);
 
@@ -112,7 +112,7 @@ var getTransactionByID = function(peer, trxnID, username, org, channelName) {
 		return 'Failed to query with error:' + err.stack ? err.stack : err;
 	});
 };
-var getBlockByHash = function(peer, hash, username, org, channelName) {
+var getBlockByHash = function (peer, hash, username, org, channelName) {
 	var target = buildTarget(peer, org);
 	var channel = helper.getChannelForOrg(org + ':' + channelName);
 
@@ -139,10 +139,10 @@ var getBlockByHash = function(peer, hash, username, org, channelName) {
 		return 'Failed to query with error:' + err.stack ? err.stack : err;
 	});
 };
-var getChainInfo = function(peer, username, org, channelname) {
+var getChainInfo = function (peer, username, org, channelname) {
 	var target = buildTarget(peer, org);
-	var channel = helper.getChannelForOrg(org+ ':' + channelname);
-	
+	var channel = helper.getChannelForOrg(org + ':' + channelname);
+
 	return helper.getRegisteredUsers(username, org).then((member) => {
 		return channel.queryInfo(target);
 	}, (err) => {
@@ -169,9 +169,11 @@ var getChainInfo = function(peer, username, org, channelname) {
 	});
 };
 //getInstalledChaincodes
-var getInstalledChaincodes = function(peer, type, username, org, channelname) {
-	var target = buildTarget("peer0", org);
-	var channel = helper.getChannelForOrg(org+ ':' + channelname);
+var getInstalledChaincodes = function (peer, type, username, org, channelname) {
+	console.log(peer, org)
+	var target = buildTarget(peer, org);
+	console.log(target)
+	var channel = helper.getChannelForOrg(org + ':' + channelname);
 	var client = helper.getClientForOrg(org);
 	var channels;
 	return helper.getOrgAdmin(org).then((member) => {
@@ -181,8 +183,8 @@ var getInstalledChaincodes = function(peer, type, username, org, channelname) {
 		} else {
 			channels = helper.getChannelsList(org);
 			var arr = [];
-			for(var i = 0; i < channels.length ; i++){
-				var channel = helper.getChannelForOrg(org + ':' + channels[i]);
+			for (var i = 0; i < channels.length; i++) {
+				var channel = helper.getChannelForOrg(channels[i]);
 				arr.push(channel.queryInstantiatedChaincodes(target));
 			}
 			return Promise.all(arr);
@@ -200,7 +202,7 @@ var getInstalledChaincodes = function(peer, type, username, org, channelname) {
 				response.chaincodes = [];
 				logger.debug('<<< Instantiated Chaincodes >>>');
 				logger.debug(channels);
-				for(var i = 0; i < response.length ; i ++){
+				for (var i = 0; i < response.length; i++) {
 					response.chaincodes.push(response[i].chaincodes[0])
 					response.chaincodes[i].name = channels[i].split(':')[1].concat(':').concat(response.chaincodes[i].name)
 				}
@@ -228,9 +230,9 @@ var getInstalledChaincodes = function(peer, type, username, org, channelname) {
 		return 'Failed to query with error:' + err.stack ? err.stack : err;
 	});
 };
-var getChannels = function(peer, username, org, channelname) {
+var getChannels = function (peer, username, org, channelname) {
 	var target = buildTarget(peer, org);
-	var channel = helper.getChannelForOrg(org+ ':' + channelname);
+	var channel = helper.getChannelForOrg(org + ':' + channelname);
 	var client = helper.getClientForOrg(org);
 
 	return helper.getRegisteredUsers(username, org).then((member) => {

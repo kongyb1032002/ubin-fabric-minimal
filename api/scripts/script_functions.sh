@@ -54,6 +54,10 @@ RestartNodeJS() {
 
 Enroll() {
     echo "POST - Enrolling ${ORG_USER} on ${ORG_NAME}"
+    echo curl -s -X POST \
+        http://localhost:8080/api/users \
+        -H "content-type: application/x-www-form-urlencoded" \
+        -d "username=${ORG_USER}&orgName=${ORG_NAME}"
     RESP=$(curl -s -X POST \
         http://localhost:8080/api/users \
         -H "content-type: application/x-www-form-urlencoded" \

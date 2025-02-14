@@ -8,13 +8,14 @@ var upgrade = require('../utils/upgrade-chaincode.js');
 var invoke = require('../utils/invoke-transaction.js');
 var query = require('../utils/query.js');
 var async = require('async');
+const { request } = require('../../app.js');
 var logger = helper.getLogger('fabricService');
 
 var pingCounter = 0;
 
 
 // Register and enroll user
-function getUsers (req, res) {
+function getUsers(req, res) {
 	var username = req.body.username;
 	var orgName = req.body.orgName;
 	logger.debug('End point : /users');
@@ -28,7 +29,7 @@ function getUsers (req, res) {
 		res.json(getErrorMessage('\'orgName\''));
 		return;
 	}
-	helper.getRegisteredUsers(username, orgName, true).then(function(response) {
+	helper.getRegisteredUsers(username, orgName, true).then(function (response) {
 		if (response && typeof response !== 'string') {
 			//response.token = token;
 			res.json(response);
@@ -41,7 +42,7 @@ function getUsers (req, res) {
 	});
 }
 // Create Channel
-function createChannel (req, res) {
+function createChannel(req, res) {
 	logger.info('<<<<<<<<<<<<<<<<< C R E A T E  C H A N N E L >>>>>>>>>>>>>>>>>');
 	logger.debug('End point : /channels');
 	var channelName = req.body.channelName;
@@ -58,12 +59,12 @@ function createChannel (req, res) {
 	}
 
 	channels.createChannel(channelName, channelConfigPath, req.body.username, req.body.orgname)
-	.then(function(message) {
-		res.send(message);
-	});
+		.then(function (message) {
+			res.send(message);
+		});
 }
 // Join Channel
-function joinChannel (req, res) {
+function joinChannel(req, res) {
 	logger.info('<<<<<<<<<<<<<<<<< J O I N  C H A N N E L >>>>>>>>>>>>>>>>>');
 	var channelName = req.params.channelName;
 	var peers = req.body.peers;
@@ -79,9 +80,9 @@ function joinChannel (req, res) {
 	}
 
 	join.joinChannel(channelName, peers, req.body.username, req.body.orgname)
-	.then(function(message) {
-		res.send(message);
-	});
+		.then(function (message) {
+			res.send(message);
+		});
 }
 // Install chaincode on target peers
 function installChaincode(req, res) {
@@ -112,9 +113,9 @@ function installChaincode(req, res) {
 	}
 
 	install.installChaincode(peers, chaincodeName, chaincodePath, chaincodeVersion, req.body.username, req.body.orgname)
-	.then(function(message) {
-		res.send(message);
-	});
+		.then(function (message) {
+			res.send(message);
+		});
 }
 // Instantiate chaincode on target peers
 function instantiateChaincode(req, res) {
@@ -151,9 +152,9 @@ function instantiateChaincode(req, res) {
 		return;
 	}
 	instantiate.instantiateChaincode(peers, channelName, chaincodeName, chaincodeVersion, functionName, args, req.body.username, req.body.orgname)
-	.then(function(message) {
-		res.send(message);
-	});
+		.then(function (message) {
+			res.send(message);
+		});
 }
 // Upgrade chaincode on target peers
 function upgradeChaincode(req, res) {
@@ -190,9 +191,9 @@ function upgradeChaincode(req, res) {
 		return;
 	}
 	upgrade.upgradeChaincode(peers, channelName, chaincodeName, chaincodeVersion, functionName, args, req.body.username, req.body.orgname)
-	.then(function(message) {
-		res.send(message);
-	});
+		.then(function (message) {
+			res.send(message);
+		});
 }
 // Invoke transaction on chaincode on target peers
 function invokeChaincode(req, res) {
@@ -228,9 +229,9 @@ function invokeChaincode(req, res) {
 	}
 
 	invoke.invokeChaincode(peers, channelName, chaincodeName, fcn, args, req.body.username, req.body.orgname)
-	.then(function(message) {
-		res.send(message);
-	});
+		.then(function (message) {
+			res.send(message);
+		});
 }
 // Query on chaincode on target peers
 function queryByChaincode(req, res) {
@@ -267,9 +268,9 @@ function queryByChaincode(req, res) {
 	logger.debug(args);
 
 	query.queryChaincode(peer, channelName, chaincodeName, args, fcn, req.query.username, req.query.orgname)
-	.then(function(message) {
-		res.send(message);
-	});
+		.then(function (message) {
+			res.send(message);
+		});
 }
 //  Query Get Block by BlockNumber
 function queryBlockNumber(req, res) {
@@ -285,7 +286,7 @@ function queryBlockNumber(req, res) {
 	}
 
 	query.getBlockByNumber(peer, blockId, req.query.username, req.query.orgname, req.params.channelName)
-		.then(function(message) {
+		.then(function (message) {
 			res.send(message);
 		});
 }
@@ -294,7 +295,7 @@ function getTransactionByID(req, res) {
 	logger.debug(
 		'================ GET TRANSACTION BY TRANSACTION_ID ======================'
 	);
-	logger.debug('channelName : %s, TrxId: %s ' , req.params.channelName, req.params.trxnId);
+	logger.debug('channelName : %s, TrxId: %s ', req.params.channelName, req.params.trxnId);
 	let trxnId = req.params.trxnId;
 	let peer = req.query.peer;
 	let channelName = req.params.channelName;
@@ -302,9 +303,9 @@ function getTransactionByID(req, res) {
 		res.json(getErrorMessage('\'trxnId\''));
 		return;
 	}
-	
+
 	query.getTransactionByID(peer, trxnId, req.query.username, req.query.orgname, channelName)
-		.then(function(message) {
+		.then(function (message) {
 			res.send(message);
 		});
 }
@@ -320,13 +321,13 @@ function getBlockByHash(req, res) {
 	}
 
 	query.getBlockByHash(peer, hash, req.query.username, req.query.orgname, req.params.channelName).then(
-		function(message) {
+		function (message) {
 			res.send(message);
 		});
 }
 //Query for Channel Information
 function queryChannelInfo(req, res) {
-	logger.debug( 
+	logger.debug(
 		'================ GET CHANNEL INFORMATION ======================');
 	// logger.debug('peer: ' + req.query.peer);
 	var bankName = req.params.requestingBank;
@@ -335,14 +336,15 @@ function queryChannelInfo(req, res) {
 	// let peer = req.query.peer;
 	logger.debug('bankName: ' + bankName);
 	logger.debug('orgname: ' + orgname);
-	logger.debug('channelname: '+ req.params.channelname);
-	query.getChainInfo("peer0", bankName , orgname, channelname ).then(
-		function(message) {
+	logger.debug('channelname: ' + req.params.channelname);
+	query.getChainInfo("peer0", bankName, orgname, channelname).then(
+		function (message) {
 			res.send(message);
 		});
 }
 // Query to fetch all Installed/instantiated chaincodes
 function getAllChaincodes(req, res) {
+	console.log("ABC")
 	var peer = req.query.peer;
 	var installType = req.query.type;
 	//TODO: add Constnats
@@ -353,11 +355,11 @@ function getAllChaincodes(req, res) {
 		logger.debug(
 			'================ GET INSTANTIATED CHAINCODES ======================');
 	}
-	
+
 	query.getInstalledChaincodes(peer, installType, req.query.username, req.query.orgname)
-	.then(function(message) {
-		res.send(message);
-	});
+		.then(function (message) {
+			res.send(message);
+		});
 }
 // Query to fetch channels
 function getChannels(req, res) {
@@ -366,12 +368,12 @@ function getChannels(req, res) {
 	var orgname = helper.bankOrgMapping[bankName];
 	logger.debug('bankName: ' + bankName);
 	logger.debug('orgname:  ' + orgname);
-	
-	query.getChannels("peer0", bankName , orgname )
-	.then(function(
-		message) {
-		res.send(message);
-	});
+
+	query.getChannels("peer0", bankName, orgname)
+		.then(function (
+			message) {
+			res.send(message);
+		});
 }
 
 function getErrorMessage(field) {
@@ -382,98 +384,98 @@ function getErrorMessage(field) {
 	return response;
 }
 
-function pingChaincode(req,res,callback){
-    var response = {};
+function pingChaincode(req, res, callback) {
+	var response = {};
 	var username = helper.whoami();
 	var orgname = helper.bankOrgMapping[username];
 	var indexOfMe = Object.keys(helper.bankOrgMapping).indexOf(username)
-	if(indexOfMe+1 == Object.keys(helper.bankOrgMapping).length ){
+	if (indexOfMe + 1 == Object.keys(helper.bankOrgMapping).length) {
 		var receiver = Object.keys(helper.bankOrgMapping)[1]
 	} else {
-		var receiver = Object.keys(helper.bankOrgMapping)[indexOfMe+1]
+		var receiver = Object.keys(helper.bankOrgMapping)[indexOfMe + 1]
 	}
 	var targetFundOrg = helper.bankOrgMapping[receiver];
-    var channelName = helper.ORGS[orgname].orgChannels[targetFundOrg]; 
-    var peers = helper.channelMapping[channelName];
+	var channelName = helper.ORGS[orgname].orgChannels[targetFundOrg];
+	var peers = helper.channelMapping[channelName];
 	var fcn = "pingChaincode";
 	var args = []
 	var chaincodeName = helper.chainCodeMapping['bilateral'];
 	var createTime = new Date();
 	async.series({
-		binvoke: function(callback) {
-			invoke.invokeChaincode(peers, channelName , chaincodeName , fcn , args , username, orgname)
-			.then(function(message) {
-				callback(null, message);
-			})
+		binvoke: function (callback) {
+			invoke.invokeChaincode(peers, channelName, chaincodeName, fcn, args, username, orgname)
+				.then(function (message) {
+					callback(null, message);
+				})
 		},
-		bquery: function(callback){
+		bquery: function (callback) {
 			query.queryChaincode("peer0", channelName, chaincodeName, args, "pingChaincodeQuery", username, orgname)
-			.then(function(message) {
-				callback(null, message);
-			})
+				.then(function (message) {
+					callback(null, message);
+				})
 		},
-		finvoke: function(callback) {
-			invoke.invokeChaincode(peers, helper.multilateralChannels[0] , helper.chainCodeMapping['funding'] , fcn , args , username, orgname)
-			.then(function(message) { 
-				callback(null, message);
-			})
+		finvoke: function (callback) {
+			invoke.invokeChaincode(peers, helper.multilateralChannels[0], helper.chainCodeMapping['funding'], fcn, args, username, orgname)
+				.then(function (message) {
+					callback(null, message);
+				})
 		},
-		fquery: function(callback){
+		fquery: function (callback) {
 			query.queryChaincode("peer0", helper.multilateralChannels[0], helper.chainCodeMapping['funding'], args, "pingChaincodeQuery", username, orgname)
-			.then(function(message) { 
-				callback(null, message);
-			})
+				.then(function (message) {
+					callback(null, message);
+				})
 		},
-		ninvoke: function(callback) {
-			invoke.invokeChaincode(helper.getAllpeers() , helper.multilateralChannels[1] , helper.chainCodeMapping['netting'] , fcn , args , username, orgname)
-			.then(function(message) { 
-				callback(null, message);
-			})
+		ninvoke: function (callback) {
+			invoke.invokeChaincode(helper.getAllpeers(), helper.multilateralChannels[1], helper.chainCodeMapping['netting'], fcn, args, username, orgname)
+				.then(function (message) {
+					callback(null, message);
+				})
 		},
-		nquery: function(callback){
-			query.queryChaincode( "peer0" , helper.multilateralChannels[1], helper.chainCodeMapping['netting'], args, "pingChaincodeQuery", username, orgname)
-			.then(function(message) { 
-				callback(null, message);
-			})
+		nquery: function (callback) {
+			query.queryChaincode("peer0", helper.multilateralChannels[1], helper.chainCodeMapping['netting'], args, "pingChaincodeQuery", username, orgname)
+				.then(function (message) {
+					callback(null, message);
+				})
 		}
-	}, function(err, results) {
+	}, function (err, results) {
 		// results is now equal to: {one: 1, two: 2}
 		var finishTime = new Date()
 		logger.debug(results)
 		response.startTime = createTime.toJSON().toString();
 		response.endTime = finishTime.toJSON().toString();
-		response.timeTaken = ((finishTime - createTime)/1000).toString().concat(" s");
+		response.timeTaken = ((finishTime - createTime) / 1000).toString().concat(" s");
 		callback(response)
 	});
-	
+
 }
 
 
-function resetAll(req,res, callback){
+function resetAll(req, res, callback) {
 	var allchannels = helper.channelMapping;
 	var fcn = "resetChannel";
 	var response = {};
-	var all = req.headers.all ? true : false 
-	var args = helper.stringify([ all ])
-	async.eachOfSeries(allchannels, function(peers,channel,functioncallback){
+	var all = req.headers.all ? true : false
+	var args = helper.stringify([all])
+	async.eachOfSeries(allchannels, function (peers, channel, functioncallback) {
 		var bankName = helper.getRUsername();
 		var orgname = helper.bankOrgMapping[bankName];
-		if (channel == "nettingchannel"){
+		if (channel == "nettingchannel") {
 			var chaincodeName = helper.chainCodeMapping['netting']
-		}else if(channel == "fundingchannel"){
+		} else if (channel == "fundingchannel") {
 			var chaincodeName = helper.chainCodeMapping['funding']
 			// peers.push(helper.channelMapping['scbcschannel'][0]);
 			peers = ["FabricNx02:7051", "FabricNx03:8051"];
 		} else {
 			var chaincodeName = helper.chainCodeMapping['bilateral']
 		}
-		logger.info("peers: %s, channel: %s, chaincodename: %s, fcn: %s, args: %s, bankname: %s, orgname: %s",peers, channel , chaincodeName , fcn, args , bankName, orgname);
-		invoke.invokeChaincode(peers, channel , chaincodeName , fcn, args , bankName, orgname)
-		.then(function(result) {
-			response[channel] = result
-			functioncallback();
-		});
-	}, function (results){
+		logger.info("peers: %s, channel: %s, chaincodename: %s, fcn: %s, args: %s, bankname: %s, orgname: %s", peers, channel, chaincodeName, fcn, args, bankName, orgname);
+		invoke.invokeChaincode(peers, channel, chaincodeName, fcn, args, bankName, orgname)
+			.then(function (result) {
+				response[channel] = result
+				functioncallback();
+			});
+	}, function (results) {
 		callback(response);
 	});
 
