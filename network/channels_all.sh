@@ -7,7 +7,7 @@ CHANNEL_SCRIPT_DIR=/etc/hyperledger/configtx
 ALL_CHANNEL_TXS=( $(ls -q channel-artifacts/*-channel.tx | xargs -n 1 basename) )
 
 # Danh sách các peer
-PEER_ORGS=("masgsgsg" "bofasg2x" "chassgsg" "citisgsg" "csfbsgsx" "dbsssgsg" "hsbcsgsg" "mtbcsgsg" "ocbcsgsg" "scblsgsg" "uobvsgsg" "xsimsgsg")
+PEER_ORGS=("masgsgsg" "bofasg2x" "chassgsg")
 
 # Lặp qua tất cả các peer
 for bank_name in "${PEER_ORGS[@]}"; do

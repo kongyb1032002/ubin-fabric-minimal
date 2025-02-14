@@ -102,60 +102,6 @@ then
 	then
 
 		Upgrade bofasg2xchassgsgchannel
-		Upgrade bofasg2xcitisgsgchannel
-		Upgrade bofasg2xcsfbsgsxchannel
-		Upgrade bofasg2xdbsssgsgchannel
-		Upgrade bofasg2xhsbcsgsgchannel
-		Upgrade bofasg2xmtbcsgsgchannel
-		Upgrade bofasg2xocbcsgsgchannel
-		Upgrade bofasg2xscblsgsgchannel
-		Upgrade bofasg2xuobvsgsgchannel
-		Upgrade bofasg2xxsimsgsgchannel
-		Upgrade chassgsgcitisgsgchannel
-		Upgrade chassgsgcsfbsgsxchannel
-		Upgrade chassgsgdbsssgsgchannel
-		Upgrade chassgsghsbcsgsgchannel
-		Upgrade chassgsgmtbcsgsgchannel
-		Upgrade chassgsgocbcsgsgchannel
-		Upgrade chassgsgscblsgsgchannel
-		Upgrade chassgsguobvsgsgchannel
-		Upgrade chassgsgxsimsgsgchannel
-		Upgrade citisgsgcsfbsgsxchannel
-		Upgrade citisgsgdbsssgsgchannel
-		Upgrade citisgsghsbcsgsgchannel
-		Upgrade citisgsgmtbcsgsgchannel
-		Upgrade citisgsgocbcsgsgchannel
-		Upgrade citisgsgscblsgsgchannel
-		Upgrade citisgsguobvsgsgchannel
-		Upgrade citisgsgxsimsgsgchannel
-		Upgrade csfbsgsxdbsssgsgchannel
-		Upgrade csfbsgsxhsbcsgsgchannel
-		Upgrade csfbsgsxmtbcsgsgchannel
-		Upgrade csfbsgsxocbcsgsgchannel
-		Upgrade csfbsgsxscblsgsgchannel
-		Upgrade csfbsgsxuobvsgsgchannel
-		Upgrade csfbsgsxxsimsgsgchannel
-		Upgrade dbsssgsghsbcsgsgchannel
-		Upgrade dbsssgsgmtbcsgsgchannel
-		Upgrade dbsssgsgocbcsgsgchannel
-		Upgrade dbsssgsgscblsgsgchannel
-		Upgrade dbsssgsguobvsgsgchannel
-		Upgrade dbsssgsgxsimsgsgchannel
-		Upgrade hsbcsgsgmtbcsgsgchannel
-		Upgrade hsbcsgsgocbcsgsgchannel
-		Upgrade hsbcsgsgscblsgsgchannel
-		Upgrade hsbcsgsguobvsgsgchannel
-		Upgrade hsbcsgsgxsimsgsgchannel
-		Upgrade mtbcsgsgocbcsgsgchannel
-		Upgrade mtbcsgsgscblsgsgchannel
-		Upgrade mtbcsgsguobvsgsgchannel
-		Upgrade mtbcsgsgxsimsgsgchannel
-		Upgrade ocbcsgsgscblsgsgchannel
-		Upgrade ocbcsgsguobvsgsgchannel
-		Upgrade ocbcsgsgxsimsgsgchannel
-		Upgrade scblsgsguobvsgsgchannel
-		Upgrade scblsgsgxsimsgsgchannel
-		Upgrade uobvsgsgxsimsgsgchannel
 	
 	fi
 

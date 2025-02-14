@@ -55,19 +55,10 @@ To install all prerequisites, download and run the [setup script](fabric-setup.s
 
     | Hostname    | Organisation BIC |
     | ----------- | ---------------- |
-    | FabricNx01  | *Orderer*               |
+    | FabricNx01  | *Orderer*        |
     | FabricNx02  | masgsgsg         |
     | FabricNx03  | bofasg2x         |
     | FabricNx04  | chassgsg         |
-    | FabricNx05  | citisgsg         |
-    | FabricNx06  | csfbsgsx         |
-    | FabricNx07  | dbsssgsg         |
-    | FabricNx08  | hsbcsgsg         |
-    | FabricNx09  | mtbcsgsg         |
-    | FabricNx010 | ocbcsgsg         |
-    | FabricNx011 | scblsgsg         |
-    | FabricNx012 | uobvsgsg         |
-    | FabricNx013 | xsimsgsg         |
 
 ### Setting up cron jobs
 

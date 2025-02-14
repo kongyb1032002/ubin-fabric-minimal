@@ -1,5 +1,0 @@
-{
-  "address": "testchaincode.example.com:19051",
-  "dial_timeout": "10s",
-  "tls_required": false
-}

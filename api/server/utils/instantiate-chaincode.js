@@ -9,14 +9,14 @@ var ORGS = helper.ORGS;
 var tx_id = null;
 var eh = null;
 
-var instantiateChaincode = function(peersUrls, channelName, chaincodeName, chaincodeVersion, functionName, args, username, org, endorsementPolicy) {
+var instantiateChaincode = function (peersUrls, channelName, chaincodeName, chaincodeVersion, functionName, args, username, org, endorsementPolicy) {
 	logger.debug('\n============ Instantiate chaincode on organization ' + org +
 		' ============\n');
-	logger.debug(org+channelName+peersUrls);
+	logger.debug(org + channelName + peersUrls);
 	var channel = helper.getChannelForOrg(org + ':' + channelName);
 	var client = helper.getClientForOrg(org);
 	var targets = helper.newPeers(peersUrls);
-	logger.debug(channel+client+targets)
+	logger.debug(channel + client + targets)
 	return helper.getOrgAdmin(org).then((user) => {
 		// read the config block from the orderer for the channel and initialize the verify MSPs based on the participating organizations
 		return channel.initialize();
@@ -40,13 +40,13 @@ var instantiateChaincode = function(peersUrls, channelName, chaincodeName, chain
 				txId: tx_id,
 				'endorsement-policy': {
 					identities: [
-						{ role: { name: 'member', mspId: ORGS[helper.bankOrgMapping[bank1]].mspid }},
-						{ role: { name: 'member', mspId: ORGS[helper.bankOrgMapping[bank2]].mspid }}					
+						{ role: { name: 'member', mspId: ORGS[helper.bankOrgMapping[bank1]].mspid } },
+						{ role: { name: 'member', mspId: ORGS[helper.bankOrgMapping[bank2]].mspid } }
 					],
 					policy: {
-						'2-of': [{ 'signed-by': 0}, { 'signed-by': 1 }]					
+						'2-of': [{ 'signed-by': 0 }, { 'signed-by': 1 }]
 					}
-				}							  
+				}
 			};
 		} else if (chaincodeName === "fundingchannel_cc") {
 			var request = {
@@ -58,34 +58,18 @@ var instantiateChaincode = function(peersUrls, channelName, chaincodeName, chain
 				txId: tx_id,
 				'endorsement-policy': {
 					identities: [
-						{ role: { name: 'member', mspId: ORGS['org0'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org1'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org2'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org3'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org4'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org5'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org6'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org7'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org8'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org9'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org10'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org11'].mspid }}
+						{ role: { name: 'member', mspId: ORGS['org0'].mspid } },
+						{ role: { name: 'member', mspId: ORGS['org1'].mspid } },
+						{ role: { name: 'member', mspId: ORGS['org2'].mspid } }
 					],
 					policy: {
-						'2-of': [{ 'signed-by': 0 }, 
-								 { 'signed-by': 1 }, 
-								 { 'signed-by': 2 }, 
-								 { 'signed-by': 3 }, 
-								 { 'signed-by': 4 }, 
-								 { 'signed-by': 5 }, 
-								 { 'signed-by': 6 }, 
-								 { 'signed-by': 7 }, 
-								 { 'signed-by': 8 }, 
-								 { 'signed-by': 9 }, 
-								 { 'signed-by': 10 }, 
-								 { 'signed-by': 11 }]
+						'2-of': [
+							{ 'signed-by': 0 },
+							{ 'signed-by': 1 },
+							{ 'signed-by': 2 },
+						]
 					}
-				}							  
+				}
 			};
 		} else if (chaincodeName === "nettingchannel_cc") {
 			var request = {
@@ -97,39 +81,23 @@ var instantiateChaincode = function(peersUrls, channelName, chaincodeName, chain
 				txId: tx_id,
 				'endorsement-policy': {
 					identities: [
-						{ role: { name: 'member', mspId: ORGS['org0'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org1'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org2'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org3'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org4'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org5'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org6'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org7'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org8'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org9'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org10'].mspid }},
-						{ role: { name: 'member', mspId: ORGS['org11'].mspid }}
+						{ role: { name: 'member', mspId: ORGS['org0'].mspid } },
+						{ role: { name: 'member', mspId: ORGS['org1'].mspid } },
+						{ role: { name: 'member', mspId: ORGS['org2'].mspid } }
 					],
 					policy: {
-						'12-of': [{ 'signed-by': 0 }, 
-								 { 'signed-by': 1 }, 
-								 { 'signed-by': 2 }, 
-								 { 'signed-by': 3 }, 
-								 { 'signed-by': 4 }, 
-								 { 'signed-by': 5 }, 
-								 { 'signed-by': 6 }, 
-								 { 'signed-by': 7 }, 
-								 { 'signed-by': 8 }, 
-								 { 'signed-by': 9 }, 
-								 { 'signed-by': 10 }, 
-								 { 'signed-by': 11 }]
+						'12-of': [
+							{ 'signed-by': 0 },
+							{ 'signed-by': 1 },
+							{ 'signed-by': 2 }
+						]
 					}
 				}
 			};
 		} else {
 			logger.error('Chaincode name not recognized');
 		}
-		
+
 		logger.info("Proposal Request : " + request.toString());
 		return channel.sendInstantiateProposal(request, 120000);
 	}, (err) => {
