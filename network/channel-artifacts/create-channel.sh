@@ -9,8 +9,9 @@ for channel_tx in "${CHANNEL_TXS[@]}"
 do
     channel_prefix="${channel_tx%%\-channel\.tx}"
     channel_name="${channel_prefix}channel"
+    echo =======================================
     echo "Creating $channel_name..."
     peer channel create -o orderer.example.com:7050 -c "$channel_name" -f "$channel_tx"
-    echo
+    echo =======================================
 done
 echo "Channel creation completed..."

@@ -14,12 +14,14 @@ then
 fi
 
 join_channel() {
+    echo =======================================
     echo "Joining $1..."
     echo peer channel fetch 0 "$1".block -o orderer.example.com:7050 -c "$1"
     peer channel fetch 0 "$1".block -o orderer.example.com:7050 -c "$1"
-
+    echo
     echo peer channel join -b "$1".block
     peer channel join -b "$1".block
+    echo =======================================
     echo
 }
 
